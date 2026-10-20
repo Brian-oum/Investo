@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}InvestoBrain Sacco Society Ltd{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}InvestoBrain Sacco Society Ltd — savings, credit and investment services built around our members.{% endblock %}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" href="{% static 'images/investo_logo.jpg' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Top info bar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-contacts">
+        <a href="tel:+254700000000">+254 700 000 000</a>
+        <a href="mailto:info@investobrainsacco.co.ke">info@investobrainsacco.co.ke</a>
+        <span>Mon &ndash; Fri, 8:00 &ndash; 17:00</span>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="InvestoBrain Sacco on Facebook">Facebook</a>
+        <a href="#" aria-label="InvestoBrain Sacco on X">X</a>
+        <a href="#" aria-label="InvestoBrain Sacco on Instagram">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="wrap">
+      <a href="{% url 'home' %}" class="brand">
+        <img src="{% static 'images/investo_logo.jpg' %}" alt="InvestoBrain Sacco Society Ltd logo" class="brand-icon">
+        <span class="brand-name">
+          <span class="line1"><span class="line1-a">Investo</span><span class="line1-b">Brain</span></span>
+          <span class="line2">Sacco Society Ltd</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="{% url 'home' %}" {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Home</a></li>
+          <li><a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About Us</a></li>
+          <li><a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %}>Services</a></li>
+          <li><a href="{% url 'investo_centre' %}" {% if request.resolver_match.url_name == 'investo_centre' %}class="active"{% endif %}>Investo Centre</a></li>
+          <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>Contact</a></li>
+          <li><a href="{% url 'blogs' %}" {% if request.resolver_match.url_name == 'blogs' %}class="active"{% endif %}>Blogs</a></li>
+        </ul>
+      </nav>
+
+      <a href="{% url 'join_us' %}" class="btn btn-primary nav-cta">Join Us</a>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">
+            <img src="{% static 'Sacco/images/investo_logo.jpg' %}" alt="InvestoBrain Sacco Society Ltd logo">
+            <span class="footer-brand-name">
+              <span class="footer-line1">Investo<span class="footer-accent">Brain</span></span>
+              <span class="footer-line2">Sacco Society Ltd</span>
+            </span>
+          </div>
+          <p>A member-owned sacco helping individuals and groups save, borrow and invest with confidence.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'services' %}">Services</a></li>
+            <li><a href="{% url 'investo_centre' %}">Investo Centre</a></li>
+            <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Member Services</h4>
+          <ul>
+            <li><a href="{% url 'join_us' %}">Join Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="#">Loan Calculator</a></li>
+            <li><a href="#">Member Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <p>InvestoBrain House, 4th Floor<br>Nairobi, Kenya</p>
+          <p>+254 700 000 000<br>info@investobrainsacco.co.ke</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; {% now "Y" %} InvestoBrain Sacco Society Ltd. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
